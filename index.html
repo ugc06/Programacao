@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        html {
+            font-size: 100%; /* base = 16px */
+        }
         body {
-            font-size: 18px;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -15,6 +17,12 @@
             align-items: center;
             min-height: 100vh;
             background-color: #f8f8f8;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        body.high-contrast {
+            background-color: #000;
+            color: #fff;
         }
         .container {
             max-width: 1000px;
@@ -22,13 +30,18 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.high-contrast .container {
+            background-color: #111;
+            color: #fff;
         }
         h2 {
-            font-size: 32px;
+            font-size: 2rem;
             text-align: center;
         }
         p {
-            font-size: 20px;
+            font-size: 1.25rem;
             text-align: justify;
         }
         .center {
@@ -37,13 +50,45 @@
             margin: 20px 0;
         }
         .small-text {
-            font-size: 14px;
+            font-size: 0.875rem;
             text-align: center;
+        }
+        .font-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .font-controls button {
+            font-size: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .font-controls button:hover {
+            background-color: #000000;
+        }
+        body.high-contrast .font-controls button {
+            background-color: #444;
+            color: #fff;
+        }
+        body.high-contrast .font-controls button:hover {
+            background-color: #888;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="font-controls">
+            <button onclick="adjustFontSize(1)">+</button>
+            <button onclick="adjustFontSize(-1)">−</button>
+            <button onclick="toggleContrast()">§</button>
+        </div>
         <h2>JEREDY E JOHN: UMA AVENTURA NA CAVERNA</h2>
         <div class="center"><img src="IMG_1299.jpeg" width="500" height="500"></div>
         <p class="small-text">Um pato preto chamado Jeredy e seu amigo, um pato branco olhando para a foto com um rio com patos atrás deles e aos lados do rio, uma cidade de patos.</p>
@@ -55,8 +100,8 @@
         <p class="small-text">Jeredy andando em uma bicicleta vermelha com um capacete azul e Larry andando em uma bicicleta azul com capacete vermelho e vários patos atrás pela cidade.</p>
         <p> Enquanto andavam pela rodovia, eles avistaram uma caverna, a uns 3 quilômetros da cidade, Jeredy, com seu espírito aventureiro, disse: _ O meu pato, vamos dar uma olhada naquela caverna?</p>
         <p> Larry para não parecer medroso aceitou e os dois partiram para ver a caverna.</p>
-        <p> Quando chegaram lá, eles viram uma placa de aviso para não entrar na caverna, deram uma olhada, mas mesmo com a placa decidiram entrar na para explorar. Depois de um tempo explorando a caverna, eles encontraram uma pequena entrada para um espaço na caverna, Jeredy viu a entrada e perguntou para Larry: _ Vamos?</p>
-        <p> Larry respondeu que sim, e qundo eles entraram,viram vários pontinhos brilhantes e ficaram impressionados e curiosos sobre oque poderia ser aqueles pontinhos.</p>
+        <p> Quando chegaram lá, eles viram uma placa de aviso para não entrar na caverna, deram uma olhada, mas mesmo com a placa decidiram entrar para explorar. Depois de um tempo explorando a caverna, eles encontraram uma pequena entrada para um espaço na caverna, Jeredy viu a entrada e perguntou para Larry: _ Vamos?</p>
+        <p> Larry respondeu que sim, e quando eles entraram,viram vários pontinhos brilhantes e ficaram impressionados e curiosos sobre oque poderia ser aqueles pontinhos.</p>
         <div class="center"><img src="95eea1f7-3950-4aed-8481-6873d107f843.jpeg" width="500" height="500"></div>
         <p class="small-text">Jeredy e seu amigo Larry em uma caverna com vários pontinhos azuis brilhantes em volta deles.</p>
         <p> Os dois então decidiram ir embora, pois já estava ficando tarde, mas que voltariam com suas mochilas no próximo dia para levar algumas daquelas pedrinhas misteriosas.</p>
@@ -72,5 +117,19 @@
         <p class="small-text">Escritor: Uri Gabriel Carneiro</p>
         <p class="small-text">Imagens: META AI</p>
     </div>
+    <script>
+        let currentFontSize = 100;
+
+        function adjustFontSize(change) {
+            currentFontSize += change * 10;
+            if (currentFontSize < 60) currentFontSize = 60;
+            if (currentFontSize > 200) currentFontSize = 200;
+            document.documentElement.style.fontSize = currentFontSize + '%';
+        }
+
+        function toggleContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+    </script>
 </body>
 </html>
